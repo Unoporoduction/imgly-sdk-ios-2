@@ -6,14 +6,8 @@
 //  Copyright (c) 2015 9elements GmbH. All rights reserved.
 //
 
-#if os(iOS)
 import UIKit
 import CoreImage
-#elseif os(OSX)
-import AppKit
-import QuartzCore
-#endif
-
 import CoreGraphics
 
 open class IMGLYStickerFilter: CIFilter {
@@ -21,11 +15,7 @@ open class IMGLYStickerFilter: CIFilter {
     @objc open var inputImage: CIImage?
     
     /// The sticker that should be rendered.
-    #if os(iOS)
     open var sticker: UIImage?
-    #elseif os(OSX)
-    public var sticker: NSImage?
-    #endif
     
     /// The transform to apply to the sticker
     open var transform = CGAffineTransform.identity
@@ -71,8 +61,6 @@ open class IMGLYStickerFilter: CIFilter {
         return CGSize(width: self.scale * imageSize.width, height: self.scale * stickerRatio * imageSize.width)
     }
     
-    #if os(iOS)
-    
     fileprivate func createStickerImage() -> UIImage {
         let rect = inputImage!.extent
         let imageSize = rect.size
@@ -89,27 +77,6 @@ open class IMGLYStickerFilter: CIFilter {
         
         return image!
     }
-    
-    #elseif os(OSX)
-    
-    private func createStickerImage() -> NSImage {
-        let rect = inputImage!.extent
-        let imageSize = rect.size
-        
-        let image = NSImage(size: imageSize)
-        image.lockFocus()
-        NSColor(white: 1, alpha: 0).setFill()
-        CGRect(origin: CGPoint(), size: imageSize).fill()
-
-        let context = NSGraphicsContext.current!.cgContext
-        drawStickerInContext(context, withImageOfSize: imageSize)
-        
-        image.unlockFocus()
-        
-        return image
-    }
-    
-    #endif
     
     fileprivate func drawStickerInContext(_ context: CGContext, withImageOfSize imageSize: CGSize) {
         context.saveGState()

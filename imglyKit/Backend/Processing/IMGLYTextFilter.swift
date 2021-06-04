@@ -6,13 +6,8 @@
 //  Copyright (c) 2015 9elements GmbH. All rights reserved.
 //
 
-#if os(iOS)
 import CoreImage
 import UIKit
-#elseif os(OSX)
-import QuartzCore
-import AppKit
-#endif
 
 open class IMGLYTextFilter : CIFilter {
     /// A CIImage object that serves as input for the filter.
@@ -27,11 +22,7 @@ open class IMGLYTextFilter : CIFilter {
     /// The relative frame of the text within the image.
     open var frame = CGRect()
     /// The color of the text.
-    #if os(iOS)
     open var color = UIColor.white
-    #elseif os(OSX)
-    public var color = NSColor.white
-    #endif
     
     override init() {
         super.init()
@@ -63,8 +54,6 @@ open class IMGLYTextFilter : CIFilter {
         }
     }
     
-    #if os(iOS)
-    
     fileprivate func createTextImage() -> UIImage {
         let rect = inputImage!.extent
         let imageSize = rect.size
@@ -79,27 +68,6 @@ open class IMGLYTextFilter : CIFilter {
         
         return image!
     }
-    
-    #elseif os(OSX)
-    
-    private func createTextImage() -> NSImage {
-        let rect = inputImage!.extent
-        let imageSize = rect.size
-    
-        let image = NSImage(size: imageSize)
-        image.lockFocus()
-    
-        NSColor(white: 1, alpha: 0).setFill()
-        CGRect(origin: CGPoint(), size: imageSize).fill()
-        let font = NSFont(name: fontName, size: fontScaleFactor * imageSize.height)
-        text.draw(in: CGRect(x: frame.origin.x * imageSize.width, y: frame.origin.y * imageSize.height, width: frame.size.width * imageSize.width, height: frame.size.height * imageSize.width), withAttributes: [NSAttributedString.Key.font: font!, NSAttributedString.Key.foregroundColor: color])
-    
-        image.unlockFocus()
-        
-        return image
-    }
-
-    #endif
 }
 
 extension IMGLYTextFilter {
@@ -110,11 +78,7 @@ extension IMGLYTextFilter {
         copy.fontName = (fontName as NSString).copy(with: zone) as! String
         copy.fontScaleFactor = fontScaleFactor
         copy.frame = frame
-        #if os(iOS)
         copy.color = color.copy(with: zone) as! UIColor
-        #elseif os(OSX)
-        copy.color = color.copy(with: zone) as! NSColor
-        #endif
         
         return copy
     }

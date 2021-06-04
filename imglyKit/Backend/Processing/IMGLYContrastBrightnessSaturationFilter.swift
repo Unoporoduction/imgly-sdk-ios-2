@@ -7,12 +7,7 @@
 //
 
 import Foundation
-
-#if os(iOS)
 import CoreImage
-#elseif os(OSX)
-import QuartzCore
-#endif
 
 open class IMGLYContrastBrightnessSaturationFilter : CIFilter {
     /// A CIImage object that serves as input for the filter.

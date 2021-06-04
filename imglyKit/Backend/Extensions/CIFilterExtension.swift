@@ -8,11 +8,7 @@
 
 import Foundation
 import ObjectiveC
-#if os(iOS)
 import CoreImage
-#elseif os(OSX)
-import QuartzCore
-#endif
 
 private var displayNameAssociationKey: UInt8 = 0
 

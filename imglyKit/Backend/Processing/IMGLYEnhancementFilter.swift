@@ -6,12 +6,7 @@
 //  Copyright (c) 2015 9elements GmbH. All rights reserved.
 //
 
-#if os(iOS)
 import CoreImage
-#elseif os(OSX)
-import QuartzCore
-#endif
-
 /**
   This class uses apples auto-enhancement filters to improve the overall
   quality of an image. Due the way this filter is used within this SDK,
@@ -23,10 +18,8 @@ open class IMGLYEnhancementFilter : CIFilter {
     /// A CIImage object that serves as input for the filter.
     @objc open var inputImage:CIImage?
     
-//    #if os(iOS)
     /// If this is set to false, the original image is returned.
     open var _enabled = true
-//    #endif
     
     /// If this is set to true, the enhanced image is kept until reset is called.
     open var storeEnhancedImage = false

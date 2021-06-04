@@ -6,13 +6,7 @@
 //  Copyright (c) 2015 9elements GmbH. All rights reserved.
 //
 
-#if os(iOS)
 import CoreImage
-#elseif os(OSX)
-import AppKit
-import QuartzCore
-#endif
-
 /**
 Represents the angle an image should be rotated by.
 */
@@ -72,11 +66,7 @@ open class IMGLYOrientationCropFilter : CIFilter {
             flipTransformation = flipTransformation.concatenating(transform)
         }
         
-        #if os(iOS)
-            let transform = NSValue(cgAffineTransform: flipTransformation)
-            #elseif os(OSX)
-            let transform = NSAffineTransform(CGAffineTransform: flipTransformation)
-        #endif
+        let transform = NSValue(cgAffineTransform: flipTransformation)
         
         filter.setValue(transform, forKey: kCIInputTransformKey)
         var outputImage = filter.outputImage
@@ -94,11 +84,7 @@ open class IMGLYOrientationCropFilter : CIFilter {
                 return outputImage
             }
             
-            #if os(iOS)
-                let transform = NSValue(cgAffineTransform: invertedTransform)
-                #elseif os(OSX)
-                let transform = NSAffineTransform(CGAffineTransform: invertedTransform)
-            #endif
+            let transform = NSValue(cgAffineTransform: invertedTransform)
             
             filter.setValue(transform, forKey: kCIInputTransformKey)
             filter.setValue(outputImage, forKey: kCIInputImageKey)

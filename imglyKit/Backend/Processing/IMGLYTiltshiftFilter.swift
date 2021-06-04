@@ -7,11 +7,7 @@
 //
 
 import Foundation
-#if os(iOS)
 import CoreImage
-#elseif os(OSX)
-import QuartzCore
-#endif
 
 @objc public enum IMGLYTiltshiftType: Int {
     case off

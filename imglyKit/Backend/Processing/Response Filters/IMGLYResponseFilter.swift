@@ -7,11 +7,7 @@
 //
 
 import Foundation
-#if os(iOS)
 import CoreImage
-#elseif os(OSX)
-import QuartzCore
-#endif
 #if SWIFT_PACKAGE
 import imglyKit_ObjC
 #endif

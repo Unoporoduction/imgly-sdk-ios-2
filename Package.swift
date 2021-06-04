@@ -6,7 +6,7 @@ let package = Package(
     name: "imglyKit",
     defaultLocalization: .resolved(),
     platforms: [
-        .iOS(.v9), .macOS(.v10_10),
+        .iOS(.v10)
     ],
     products: [
         .library(
@@ -33,11 +33,7 @@ let package = Package(
 
 private extension LanguageTag {
     static func resolved() -> LanguageTag? {
-        #if os(iOS)
         return .init("en")
-        #elseif os(macOS)
-        return nil
-        #endif
     }
 }
 
@@ -50,13 +46,7 @@ private enum Exclude {
     }
     
     static func platform() -> [String] {
-        #if os(iOS)
         return []
-        #elseif os(macOS)
-        return [
-            "Frontend",
-        ]
-        #endif
     }
     
     static func resolved() -> [String] {
@@ -73,11 +63,7 @@ private extension Resource {
     }
     
     static func platform() -> [Self] {
-        #if os(iOS)
         return []
-        #elseif os(macOS)
-        return []
-        #endif
     }
     
     static func resolved() -> [Self] {

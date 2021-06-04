@@ -6,12 +6,7 @@
 //  Copyright (c) 2015 9elements GmbH. All rights reserved.
 //
 
-#if os(iOS)
-    import CoreImage
-    #elseif os(OSX)
-    import AppKit
-    import QuartzCore
-#endif
+import CoreImage
 
 open class IMGLYScaleFilter: CIFilter {
     open var inputImage: CIImage?

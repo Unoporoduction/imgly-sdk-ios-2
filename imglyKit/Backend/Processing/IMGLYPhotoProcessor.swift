@@ -7,13 +7,8 @@
 //
 
 import Foundation
-#if os(iOS)
 import CoreImage
 import UIKit
-#elseif os(OSX)
-import QuartzCore
-import AppKit
-#endif
 
 /**
 All types of response-filters.
@@ -104,8 +99,6 @@ open class IMGLYPhotoProcessor {
         return currentImage
     }
     
-    #if os(iOS)
-    
     open class func processWithUIImage(_ image: UIImage, filters: [CIFilter]) -> UIImage? {
         let imageOrientation = image.imageOrientation
         guard let coreImage = CIImage(image: image) else {
@@ -116,23 +109,4 @@ open class IMGLYPhotoProcessor {
         let filteredCGImage = CIContext(options: nil).createCGImage(filteredCIImage!, from: filteredCIImage!.extent)
         return UIImage(cgImage: filteredCGImage!, scale: 1.0, orientation: imageOrientation)
     }
-    
-    #elseif os(OSX)
-
-    public class func processWithNSImage(image: NSImage, filters: [CIFilter]) -> NSImage? {
-        if let tiffRepresentation = image.tiffRepresentation, let image = CIImage(data: tiffRepresentation) {
-            let filteredCIImage = processWithCIImage(image, filters: filters)
-            
-            if let filteredCIImage = filteredCIImage {
-                let rep = NSCIImageRep(ciImage: filteredCIImage)
-                let image = NSImage(size: NSSize(width: filteredCIImage.extent.size.width, height: filteredCIImage.extent.size.height))
-                image.addRepresentation(rep)
-                return image
-            }
-        }
-        
-        return nil
-    }
-    
-    #endif
 }
