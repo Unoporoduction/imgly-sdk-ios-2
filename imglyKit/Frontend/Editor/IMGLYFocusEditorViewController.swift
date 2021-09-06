@@ -75,6 +75,9 @@ open class IMGLYFocusEditorViewController: IMGLYSubEditorViewController {
         
         let bundle = Bundle(for: type(of: self))
         navigationItem.title = NSLocalizedString("focus-editor.title", tableName: nil, bundle: bundle, value: "", comment: "")
+
+        navigationItem.leftBarButtonItem?.tintColor = UIColor.white
+        navigationItem.rightBarButtonItem?.tintColor = UIColor.white
         
         configureButtons()
         configureGradientViews()

@@ -89,6 +89,9 @@ open class IMGLYTextEditorViewController: IMGLYSubEditorViewController {
 
         let bundle = Bundle(for: type(of: self))
         navigationItem.title = NSLocalizedString("text-editor.title", tableName: nil, bundle: bundle, value: "", comment: "")
+
+        navigationItem.leftBarButtonItem?.tintColor = UIColor.white
+        navigationItem.rightBarButtonItem?.tintColor = UIColor.white
         
         IMGLYInstanceFactory.fontImporter().importFonts()
         

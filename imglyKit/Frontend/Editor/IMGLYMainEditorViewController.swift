@@ -126,6 +126,9 @@ open class IMGLYMainEditorViewController: IMGLYEditorViewController {
         let bundle = Bundle(for: type(of: self))
         navigationItem.title = NSLocalizedString("main-editor.title", tableName: nil, bundle: bundle, value: "", comment: "")
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(IMGLYMainEditorViewController.cancelTapped(_:)))
+
+        navigationItem.leftBarButtonItem?.tintColor = UIColor.white
+        navigationItem.rightBarButtonItem?.tintColor = UIColor.white
         
         navigationController?.delegate = self
         

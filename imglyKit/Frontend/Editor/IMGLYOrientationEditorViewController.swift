@@ -71,6 +71,9 @@ open class IMGLYOrientationEditorViewController: IMGLYSubEditorViewController {
         
         let bundle = Bundle(for: type(of: self))
         navigationItem.title = NSLocalizedString("orientation-editor.title", tableName: nil, bundle: bundle, value: "", comment: "")
+
+        navigationItem.leftBarButtonItem?.tintColor = UIColor.white
+        navigationItem.rightBarButtonItem?.tintColor = UIColor.white
         
         configureButtons()
         configureCropRect()

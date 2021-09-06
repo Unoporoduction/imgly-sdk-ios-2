@@ -17,6 +17,9 @@ open class IMGLYContrastEditorViewController: IMGLYSliderEditorViewController {
         
         let bundle = Bundle(for: type(of: self))
         navigationItem.title = NSLocalizedString("contrast-editor.title", tableName: nil, bundle: bundle, value: "", comment: "")
+
+        navigationItem.leftBarButtonItem?.tintColor = UIColor.white
+        navigationItem.rightBarButtonItem?.tintColor = UIColor.white
     }
     
     // MARK: - SliderEditorViewController
